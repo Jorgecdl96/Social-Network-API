@@ -1,46 +1,5 @@
 const { Thought, User } = require('../models');
 
-// const getAllUsers = (req, res) => {
-//     User.find()
-//     .then((users) => res.json(users))
-//     .catch((err) => res.status(500).json(err));
-// };
-
-// const getSingleUser = (req, res) => {
-//     User.findOne({ _id: req.params.userId })
-//       .select('-__v')
-//       .populate('thought')
-//       .populate('user')
-//       .then((user) =>
-//         !user
-//           ? res.status(404).json({ message: 'No user with that ID' })
-//           : res.json(user)
-//       )
-//       .catch((err) => res.status(500).json(err));
-// };
-
-// const newUser = (req, res) => {
-//     User.create(req.body)
-//       .then((dbUserData) => res.json(dbUserData))
-//       .catch((err) => res.status(500).json(err));
-// }
-
-// const updateUser = (req, res) => {
-//     User.findOneAndUpdate(
-//         {_id: req.params.ThoughtId},
-//         { $set: req.body },
-//         { runValidators: true, new: true }
-//     )
-//     .then((user) =>
-//         !user
-//           ? res.status(404).json({ message: 'No user with this id!' })
-//           : res.json(user)
-//       )
-//       .catch((err) => {
-//         console.log(err);
-//         res.status(500).json(err);
-//       });
-// }
 const userControllerObject = {
 
   getUsers: async (req, res) => {
@@ -102,7 +61,60 @@ const userControllerObject = {
     } catch (error) {
       res.status(500).json(error);
     }
-   }
+   },
+
+   addFriends: async (req, res) => {
+    try {
+      const id = req.params.userId;
+      const newFriend = req.params.friendId;
+
+      const friendAdded = await User.addFriendByIdUserSchema(id,newFriend);
+
+      res.status(200).json(friendAdded);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+   },
+
+   deleteFriend: async (req, res) => {
+    try {
+      const id = req.params.userId;
+      const removeFriend = req.params.friendId;
+
+      const friendRemoved = await User.removeFriendByIdUserSchema(id,removeFriend);
+
+      res.status(200).json(friendRemoved);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+   },
+
+   userIdExists: async (req, res, next) => {
+    try {
+      const idUser = await User.findById(req.params.userId);
+  
+      if (!idUser) return res.status(404).json({ message: `User ID: ${req.params.userId} Not Found`});
+
+      next();
+
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  userAndFriendIdExists: async (req, res, next) => {
+    try {
+      const idUser = await User.findById(req.params.userId);
+      const idFriend = await User.findById(req.params.friendId);
+  
+      if (!idUser) return res.status(404).json({ message: `User ID: ${req.params.userId} Not Found`});
+      if (!idFriend) return res.status(404).json({ message: `Friend ID: ${req.params.userId} Not Found`});
+
+      next();
+
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 
   };
 

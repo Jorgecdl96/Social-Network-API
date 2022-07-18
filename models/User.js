@@ -62,13 +62,29 @@ userSchema.statics.createUserSchema = function (data){
 userSchema.statics.updateUserSchema = function (id, body){
   return this.findOneAndUpdate(
     {_id: id},
-    { $set: {body} },
+    { $set: body },
     { runValidators: true, new: true }
   );
 };
 
 userSchema.statics.deleteByIdUserSchema = function (id){
   return this.findByIdAndDelete(id);
+};
+
+userSchema.statics.addFriendByIdUserSchema = function (id,newFriend){
+  return this.findOneAndUpdate(
+    {_id: id},
+    { $addToSet: {friends: newFriend} },
+    { runValidators: true, new: true }
+  );
+};
+
+userSchema.statics.removeFriendByIdUserSchema = function (id,removeFriend){
+  return this.findOneAndUpdate(
+    {_id: id},
+    { $pull: {friends: removeFriend} },
+    { runValidators: true, new: true }
+  );
 };
 
 const User = model('user', userSchema);

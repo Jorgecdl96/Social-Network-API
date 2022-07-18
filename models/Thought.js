@@ -29,12 +29,54 @@ const thoughtSchema = new Schema(
       getters: true,
       virtuals: true,
     },
+    id: false
   }
 );
 
 thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
+
+thoughtSchema.statics.getThoughtSchema = function() {
+  return this.find({});
+ };
+ 
+ thoughtSchema.statics.getOneThoughtSchema = function (id){
+   return this.findById(id);
+ };
+ 
+ thoughtSchema.statics.createThoughtSchema = function (data){
+   return this.create(data);
+ };
+ 
+ thoughtSchema.statics.updateThoughtSchema = function (id, body){
+   return this.findOneAndUpdate(
+     {_id: id},
+     { $set: body },
+     { runValidators: true, new: true }
+   );
+ };
+ 
+ thoughtSchema.statics.deleteByIdThoughtSchema = function (id){
+   return this.findByIdAndDelete(id);
+ };
+ 
+ thoughtSchema.statics.addReactionByIdThoughtSchema = function (id,reaction){
+   return this.findOneAndUpdate(
+     {_id: id},
+     { $addToSet: {reactions: reaction} },
+     { runValidators: true, new: true }
+   );
+ };
+ 
+ thoughtSchema.statics.removeReactionByIdThoughtSchema = function (id,deleteReaction){
+   return this.findOneAndUpdate(
+     {_id: id},
+     { $pull: {reactions: {reactionId:  deleteReaction}} },
+     { runValidators: true, new: true }
+   );
+ };
+ 
 
 const Thought = model('thought', thoughtSchema);
 

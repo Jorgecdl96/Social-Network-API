@@ -67,7 +67,7 @@ userSchema.statics.updateUserSchema = function (id, body){
   );
 };
 
-userSchema.statics.deleteUserSchema = function (id){
+userSchema.statics.deleteByIdUserSchema = function (id){
   return this.findByIdAndDelete(id);
 };
 

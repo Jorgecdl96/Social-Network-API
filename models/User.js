@@ -39,6 +39,7 @@ const userSchema = new Schema(
       getters: true,
       virtuals: true,
     },
+    id: false
   }
 );
 
@@ -46,6 +47,31 @@ userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 
+userSchema.statics.getUserSchema = function() {
+ return this.find({});
+};
+
+userSchema.statics.getOneUserSchema = function (id){
+  return this.findById(id).populate('thoughts').populate('friends');
+};
+
+userSchema.statics.createUserSchema = function (data){
+  return this.create(data);
+};
+
+userSchema.statics.updateUserSchema = function (id, body){
+  return this.findOneAndUpdate(
+    {_id: id},
+    { $set: {body} },
+    { runValidators: true, new: true }
+  );
+};
+
+userSchema.statics.deleteUserSchema = function (id){
+  return this.findByIdAndDelete(id);
+};
+
 const User = model('user', userSchema);
+
 
 module.exports = User; 

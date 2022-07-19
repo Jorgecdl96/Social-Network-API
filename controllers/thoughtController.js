@@ -94,25 +94,11 @@ thoughtControllerObject = {
     }
    },
 
-   userIdExists: async (req, res, next) => {
+   thoughtIdExists: async (req, res, next) => {
     try {
-      const idUser = await User.findById(req.params.userId);
+      const idThought = await Thought.findById(req.params.thoughtId);
   
-      if (!idUser) return res.status(404).json({ message: `User ID: ${req.params.userId} Not Found`});
-
-      next();
-
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-  userAndFriendIdExists: async (req, res, next) => {
-    try {
-      const idUser = await User.findById(req.params.userId);
-      const idFriend = await User.findById(req.params.friendId);
-  
-      if (!idUser) return res.status(404).json({ message: `User ID: ${req.params.userId} Not Found`});
-      if (!idFriend) return res.status(404).json({ message: `Friend ID: ${req.params.userId} Not Found`});
+      if (!idThought) return res.status(404).json({ message: `Thought ID: ${req.params.thoughtId} Not Found`});
 
       next();
 

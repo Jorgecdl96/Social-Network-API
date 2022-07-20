@@ -13,8 +13,6 @@ const {
 // /api/thoughts
 router.route('/').get(getThoughts).post(createThought);
 
-router.use('/:thoughtId', thoughtIdExists);
-
 // /api/thoughts/:thoughtId
 router.route('/:thoughtId').get(getOneThought).put(updateThought).delete(deleteThought);
 

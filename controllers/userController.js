@@ -56,6 +56,9 @@ const userControllerObject = {
       const id = req.params.userId;
   
       const userRemoved = await User.deleteByIdUserSchema(id);
+
+      const associatedThoughts = userRemoved.username;
+      await Thought.removeThoughtsByUsernameThoughtSchema(associatedThoughts)
      
       res.status(200).json(userRemoved);
     } catch (error) {
@@ -87,34 +90,7 @@ const userControllerObject = {
     } catch (error) {
       res.status(500).json(error);
     }
-   },
-
-   userIdExists: async (req, res, next) => {
-    try {
-      const idUser = await User.findById(req.params.userId);
-  
-      if (!idUser) return res.status(404).json({ message: `User ID: ${req.params.userId} Not Found`});
-
-      next();
-
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-  userAndFriendIdExists: async (req, res, next) => {
-    try {
-      const idUser = await User.findById(req.params.userId);
-      const idFriend = await User.findById(req.params.friendId);
-  
-      if (!idUser) return res.status(404).json({ message: `User ID: ${req.params.userId} Not Found`});
-      if (!idFriend) return res.status(404).json({ message: `Friend ID: ${req.params.userId} Not Found`});
-
-      next();
-
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  }
+   }
 
   };
 

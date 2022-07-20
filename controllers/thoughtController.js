@@ -17,8 +17,9 @@ thoughtControllerObject = {
   getOneThought: async (req,res) => {
    try {
      const oneThought = await Thought.getOneThoughtSchema(req.params.thoughtId);
-   
-     res.status(200).json(oneThought);
+
+      res.status(200).json(oneThought);
+        
    } catch (error) {
      res.status(500).json(error);
    }
@@ -92,20 +93,7 @@ thoughtControllerObject = {
     } catch (error) {
       res.status(500).json(error);
     }
-   },
-
-   thoughtIdExists: async (req, res, next) => {
-    try {
-      const idThought = await Thought.findById(req.params.thoughtId);
-  
-      if (!idThought) return res.status(404).json({ message: `Thought ID: ${req.params.thoughtId} Not Found`});
-
-      next();
-
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  }
+   }
 };
 
 module.exports = thoughtControllerObject

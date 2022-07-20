@@ -14,9 +14,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: function (date) {
-        date.toLocaleDateString('en-US')
-      },
+      get: (date) => date.toLocaleDateString('en-US'),
     },
     username: {
       type: String,
@@ -77,6 +75,9 @@ thoughtSchema.statics.getThoughtSchema = function() {
    );
  };
  
+ thoughtSchema.statics.removeThoughtsByUsernameThoughtSchema = function (deleteThoughts){
+  return this.findOneAndDelete({username: deleteThoughts});
+};
 
 const Thought = model('thought', thoughtSchema);
 

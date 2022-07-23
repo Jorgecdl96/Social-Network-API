@@ -39,7 +39,7 @@ The Package json is already added in this project, so you should only have to in
 
 4. Post a new user and thought in format json respectively as the following:
 
-Route: `/api/users`
+Route: `/api/users`.
 
 `
 {
@@ -48,7 +48,7 @@ Route: `/api/users`
 }
 `
 
-Route: `/api/thoughts`
+Route: `/api/thoughts`.
 
 `
 {

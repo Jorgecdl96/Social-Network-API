@@ -41,22 +41,24 @@ The Package json is already added in this project, so you should only have to in
 
 Route: `/api/users`.
 
-`
+
 {
+`
   "username": "lernantino",
   "email": "lernantino@gmail.com"
-}
 `
+}
+
 
 Route: `/api/thoughts`.
 
-`
 {
+`
   "thoughtText": "Here's a cool thought...",
   "username": "lernantino",
   "userId": "5edff358a0fcb779aa7b118b"
-}
 `
+}
 
 ## Mock-Up
 

@@ -5,7 +5,7 @@ thoughtControllerObject = {
     try {
    
       const thoughts = await Thought.getThoughtSchema();
-   
+      
       res.status(200).json(thoughts);
    
     } catch (error) {

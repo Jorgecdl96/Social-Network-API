@@ -5,6 +5,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
+      lowercase: true,
       required: true,
       unique: true,
       trim: true
@@ -13,6 +14,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
+      lowercase: true,
       unique: true,
       validate: {
         validator: (email) => {

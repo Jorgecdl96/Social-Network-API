@@ -6,7 +6,7 @@ const userControllerObject = {
     try {
    
       const users = await User.getUserSchema();
-   
+
       res.status(200).json(users);
    
     } catch (error) {
@@ -58,8 +58,10 @@ const userControllerObject = {
       const userRemoved = await User.deleteByIdUserSchema(id);
 
       const associatedThoughts = userRemoved.username;
-      await Thought.removeThoughtsByUsernameThoughtSchema(associatedThoughts)
-     
+
+      // Remove a user's associated thoughts when deleted.
+      await Thought.deleteThoughtsAssociatedUsernameThoughtSchema(associatedThoughts);
+
       res.status(200).json(userRemoved);
     } catch (error) {
       res.status(500).json(error);

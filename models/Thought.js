@@ -75,8 +75,8 @@ thoughtSchema.statics.getThoughtSchema = function() {
    );
  };
  
- thoughtSchema.statics.removeThoughtsByUsernameThoughtSchema = function (deleteThoughts){
-  return this.findOneAndDelete({username: deleteThoughts});
+ thoughtSchema.statics.deleteThoughtsAssociatedUsernameThoughtSchema = function (deleteThoughts){
+  return this.deleteMany({username: deleteThoughts});
 };
 
 const Thought = model('thought', thoughtSchema);

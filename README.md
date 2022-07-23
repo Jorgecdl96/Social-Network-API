@@ -103,7 +103,7 @@ You can send an e-mail to Jorgecdl96@gmail.com for any additional question.
 
 You can see in the video how to use the routes .
 
-This Video demonstrate how to start the application’s server.
+This Video [run server](https://drive.google.com/file/d/1l7Sg6vImtYYvpdqR26Kf2TEj9vaJEjLz/view?usp=sharing) demonstrate how to start the application’s server.
 
 The [Social Network API insomnia Video]() demonstrate the following: 
 

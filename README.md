@@ -40,13 +40,16 @@ The Package json is already added in this project, so you should only have to in
 4. Post a new user and thought in format json respectively as the following:
 
 Route: `/api/users`
+
 `
 {
   "username": "lernantino",
   "email": "lernantino@gmail.com"
 }
 `
+
 Route: `/api/thoughts`
+
 `
 {
   "thoughtText": "Here's a cool thought...",
@@ -105,7 +108,7 @@ You can see in the video how to use the routes .
 
 This Video [run server](https://drive.google.com/file/d/1l7Sg6vImtYYvpdqR26Kf2TEj9vaJEjLz/view?usp=sharing) demonstrate how to start the application’s server.
 
-The [Social Network API insomnia Video]() demonstrate the following: 
+The [Social Network API insomnia Video](https://drive.google.com/file/d/1yWbxwYAkBbn6J0WJ38U7-nImQF6O4A_m/view?usp=sharing) demonstrate the following: 
 
 * GET routes for all users and all thoughts being tested in Insomnia.
 
